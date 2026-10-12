@@ -28,13 +28,17 @@ credenciais Google (criptografadas no MySQL) rodam na subida do container do bac
 
 | Endereço | O quê |
 |---|---|
-| `http://9drive.lvh.me` | painel (porta 80, sem porta no endereço) |
-| `http://api.9drive.lvh.me` | API |
+| `http://9drive.localhost` | painel — endereço do dia a dia (sem porta) |
+| `http://api.9drive.localhost` | API (opcional; o painel usa o mesmo caminho `/api` na origem) |
 | `http://localhost:5173` | endereço antigo, mantido funcionando |
 
-`*.lvh.me` é DNS público que resolve para `127.0.0.1` — funciona sem editar `/etc/hosts` e é aceito
-pelo console do Google. `.localhost` **não** serve: o Google exige TLD público para a origem
-JavaScript do cliente OAuth.
+O app **em produção** chama a API por `/api` na **própria origem** (`src/lib/api.ts`: se `VITE_API_URL`
+for o default `http://localhost:4000`, usa `/api`), e o nginx do frontend faz o proxy para o backend —
+logo não há CORS envolvido.
+
+`*.localhost` é resolvido para loopback por Chrome e Firefox sem editar `/etc/hosts` (sem sudo).
+**Não** use `lvh.me`/`nip.io`/`sslip.io`: o Chrome bloqueia domínios públicos que resolvem para
+127.0.0.1 (`net::ERR_BLOCKED_BY_CLIENT`) — o `curl` responde 200 e mascara o problema.
 
 ## Recuperação (incidente de 12/10/2026)
 
