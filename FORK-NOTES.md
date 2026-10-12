@@ -11,7 +11,10 @@ PCM Lab (UEPB) para uso interno: pool de várias contas Google Drive num painel 
 | `backend/src/modules/connected-accounts/connected-account.routes.ts` | mesma remoção | Idem, no fluxo de conectar uma nova conta. |
 | `backup-9drive.sh` | novo | Dump diário do MySQL (gzip, retenção de 14) em `~/Yandex.Disk/9drive-backups` — pasta de **1º nível**, que o daemon do Yandex sincroniza de verdade (`Pesquisa` está em `--exclude-dirs` e não sobe), agendado no crontab do usuário. |
 | `frontend/nginx.conf` | bloco `server` para a API + `listen 80 default_server` no bloco da SPA | Permite abrir o app sem porta (`http://9drive.localhost`), com a API num host próprio. O `default_server` é obrigatório: sem ele o primeiro bloco vira o padrão e engole o frontend (404). |
-| `docker-compose.yml` | `ports: 80:80` (+`5173:80`) e `frontend/nginx.conf` montado como volume | Endereço sem porta e edição do nginx sem rebuild. |
+| `docker-compose.yml` | `ports: 80:80`, `443:443` (+`5173:80`), nginx.conf e `certs/` montados como volume | Endereço sem porta, edição do nginx sem rebuild e TLS local para o redirect do Google. |
+| `frontend/nginx.conf` | bloco `server` TLS em 443 (`server_name localhost`) → backend | O Google só permite publicar o app se **todas** as URIs de redirecionamento forem HTTPS. |
+| `docs/index.html`, `docs/privacy.html` | novo — site publicado pelo GitHub Pages | Homepage e política de privacidade exigidas pelo Google Auth Platform para publicar o app. |
+| `scripts/gerar-certificado.sh` | novo | Regenera o certificado TLS local e confia nele no NSS do usuário (Chrome/Zen). |
 | `.gitignore` | `+ .env.docker`, `+ backups/` | Impede que segredos de deploy e dumps do banco entrem no git. |
 
 ## Deploy

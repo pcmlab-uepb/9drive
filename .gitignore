@@ -20,3 +20,6 @@ frontend/.env.*.local
 # Deploy local (PCM Lab): segredos e dumps do banco nunca vão para o git
 .env.docker
 backups/
+
+# certificado local (nunca versionar a chave)
+certs/

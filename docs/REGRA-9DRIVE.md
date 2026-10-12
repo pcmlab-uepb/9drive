@@ -12,11 +12,21 @@ artefatos pesados, conferir o *Quota Tracker* do painel. Credencial do pool nunc
 ficam criptografados no banco do serviço.
 
 **Acesso:** `http://9drive.localhost` (atalho "9Drive" no menu e na área de trabalho) · API interna
-`http://localhost:4000` · banco no volume Docker `9drive_mysql_data`.
+`http://localhost:4000` e `https://localhost` (TLS local, usado no redirect do Google).
 Código de trabalho: **`~/projetos/9drive`** (fora do Yandex.Disk) · segredos
 `~/projetos/9drive/.env.docker` (600, nunca versionado) · cópia dos segredos **sincronizada** em
 `~/Yandex.Disk/9drive-backups/.env.docker` · backup do banco às 3h20 em `~/Yandex.Disk/9drive-backups/`
 (retenção 14 dias).
+
+**Google (app OAuth publicado):** status **"Em produção"** desde 12/10/2026 (fim da reautorização a
+cada 7 dias), projeto `fq2-materiais-261011`, cliente Web "9Drive" com redirect
+`https://localhost/connected-accounts/google/callback` — **somente HTTPS**: o Google recusa publicar
+enquanto houver qualquer URI de redirecionamento/origem HTTP no cliente.
+Página pública e política de privacidade (exigidas para publicar): **https://pcmlab-uepb.github.io/9drive/**
+e **.../privacy.html** (fonte em `docs/`, publicadas pelo GitHub Pages do repositório).
+Certificado TLS local: `certs/` (fora do git) — regerar com `bash scripts/gerar-certificado.sh`.
+Ao conectar contas: a tela de consentimento é do app publicado (pode exibir aviso de app não verificado,
+pois o escopo `drive` é restrito e não passou pela verificação do Google).
 
 **⚠️ Nunca manter a cópia de trabalho dentro de `~/Yandex.Disk`.** A pasta `Pesquisa` está em
 `--exclude-dirs` (nada dela sobe para a nuvem) e o botão *Aplicar* do Gerenciador do Yandex.Disk
