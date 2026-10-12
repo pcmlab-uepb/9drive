@@ -5,7 +5,10 @@ set -euo pipefail
 
 PROJ="/home/rodrigo/Yandex.Disk/Pesquisa/9drive"
 ENVF="$PROJ/.env.docker"
-BKDIR="$PROJ/backups"
+# ATENCAO: a pasta Pesquisa esta em --exclude-dirs do daemon do Yandex.Disk
+# (nao sobe para a nuvem). Por isso o backup vai para uma pasta de 1o nivel,
+# que o daemon sincroniza de verdade — senao nao haveria copia recuperavel.
+BKDIR="/home/rodrigo/Yandex.Disk/9drive-backups"
 KEEP=14
 
 mkdir -p "$BKDIR"
