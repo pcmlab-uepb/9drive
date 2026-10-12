@@ -16,3 +16,7 @@ backend/.env.*.local
 # Local env is non-secret by default, keep example in repo instead.
 frontend/.env.local
 frontend/.env.*.local
+
+# Deploy local (PCM Lab): segredos e dumps do banco nunca vão para o git
+.env.docker
+backups/
