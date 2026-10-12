@@ -13,6 +13,9 @@ ficam criptografados no banco do serviço.
 
 **Acesso:** `http://9drive.localhost` (atalho "9Drive" no menu e na área de trabalho) · API interna
 `http://localhost:4000` e `https://localhost` (TLS local, usado no redirect do Google).
+**Pasta montada:** **`~/Drive`** — o Google Drive da conta principal montado como pasta comum
+(rclone; serviço de usuário `rclone-9drive.service`, sobe no login). Para copiar/abrir arquivo sem
+passar pelo painel, use essa pasta; escrita direta funciona (sobe ao fechar o arquivo).
 Código de trabalho: **`~/projetos/9drive`** (fora do Yandex.Disk) · segredos
 `~/projetos/9drive/.env.docker` (600, nunca versionado) · cópia dos segredos **sincronizada** em
 `~/Yandex.Disk/9drive-backups/.env.docker` · backup do banco às 3h20 em `~/Yandex.Disk/9drive-backups/`

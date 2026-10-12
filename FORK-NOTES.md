@@ -15,7 +15,24 @@ PCM Lab (UEPB) para uso interno: pool de várias contas Google Drive num painel 
 | `frontend/nginx.conf` | bloco `server` TLS em 443 (`server_name localhost`) → backend | O Google só permite publicar o app se **todas** as URIs de redirecionamento forem HTTPS. |
 | `docs/index.html`, `docs/privacy.html` | novo — site publicado pelo GitHub Pages | Homepage e política de privacidade exigidas pelo Google Auth Platform para publicar o app. |
 | `scripts/gerar-certificado.sh` | novo | Regenera o certificado TLS local e confia nele no NSS do usuário (Chrome/Zen). |
-| `.gitignore` | `+ .env.docker`, `+ backups/` | Impede que segredos de deploy e dumps do banco entrem no git. |
+| `.gitignore` | `+ .env.docker`, `+ backups/`, `+ certs/` | Impede que segredos de deploy, dumps do banco e a chave TLS entrem no git. |
+
+## Pasta montada (rclone) — `~/Drive`
+
+Além do painel web, o Google Drive da conta principal fica montado como **pasta comum**:
+
+| Peça | Valor |
+|---|---|
+| Ponto de montagem | `~/Drive` (atalho no gerenciador de arquivos e no grupo de trabalho) |
+| Serviço | `systemd --user rclone-9drive.service` (habilitado; sobe no login) |
+| Config | `~/.config/rclone/rclone.conf` (600; contém o token OAuth — **nunca versionar**) |
+| Log | `~/.cache/rclone/nuvem.log` |
+| Comandos | `systemctl --user restart rclone-9drive` · `rclone about nuvem:` · `rclone lsf nuvem:` |
+
+**Cuidado (pendência conhecida):** o remote usa o `client_id` **compartilhado do rclone**, que será
+aposentado ao longo de 2026 — quando parar de funcionar, criar um cliente OAuth tipo *Desktop* no
+projeto e informar `client_id`/`client_secret` no `rclone.conf` (o console do Google **não permite mais
+reler** secrets depois de criados: anote o valor na hora da criação).
 
 ## Deploy
 
