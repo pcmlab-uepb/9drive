@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9Drive — pool de contas Google Drive (PCM Lab / UEPB)</title>
+<style>
+  :root { --fg:#111827; --muted:#4b5563; --brand:#2f6fed; --line:#e5e7eb; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color:var(--fg); line-height:1.6; }
+  header { background:linear-gradient(135deg,#2f6fed,#22c1a4); color:#fff; padding:56px 24px; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+  header h1 { margin:0 0 8px; font-size: 2rem; }
+  header p { margin:0; opacity:.95; }
+  main { padding: 40px 0 64px; }
+  h2 { margin-top: 36px; font-size: 1.2rem; }
+  ul { padding-left: 1.2rem; }
+  a { color: var(--brand); }
+  code { background:#f3f4f6; padding:2px 6px; border-radius:4px; font-size:.92em; }
+  .box { border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin:22px 0; background:#fafafa; }
+  footer { border-top:1px solid var(--line); padding:22px 0 48px; color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>9Drive</h1>
+    <p>Pool de contas Google Drive do PCM Lab (UEPB) — vários Drives, um painel só.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <p><strong>9Drive</strong> é uma aplicação de uso interno do <strong>PCM Lab — Laboratório de Pesquisa
+  em Química de Materiais, Universidade Estadual da Paraíba (UEPB)</strong>. Ela reúne as contas
+  Google Drive do laboratório em um único painel e direciona cada arquivo enviado para a conta que
+  tem mais espaço livre, permitindo aproveitar a cota somada das contas em vez de uma única cota.</p>
+
+  <h2>O que a aplicação faz</h2>
+  <ul>
+    <li>Autoriza, com consentimento explícito do titular, acesso ao Google Drive de cada conta conectada;</li>
+    <li>Envia arquivos (upload) pela conta com mais espaço disponível, de forma automática;</li>
+    <li>Lista, organiza em pastas virtuais, compartilha e exclui os arquivos enviados;</li>
+    <li>Exibe o uso de cota de cada conta conectada.</li>
+  </ul>
+
+  <div class="box">
+    <strong>Uso dos dados do Google</strong>
+    <p>O uso das informações recebidas das APIs do Google pelo 9Drive está em conformidade com a
+    <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Política
+    de Dados de Usuário dos Serviços de API do Google</a>, incluindo os requisitos de
+    <em>Uso Limitado (Limited Use)</em>.</p>
+    <p>Detalhes em <a href="privacy.html">Política de Privacidade</a> (também disponível em
+    <a href="privacy.html#english">English</a>).</p>
+  </div>
+
+  <h2>Contato</h2>
+  <p>PCM Lab — UEPB · <a href="mailto:deoliveirarj@servidor.uepb.edu.br">deoliveirarj@servidor.uepb.edu.br</a><br>
+  Campina Grande — PB, Brasil</p>
+</main>
+
+<footer class="wrap">
+  9Drive é software livre derivado do projeto <a href="https://github.com/zenhosta/9drive" rel="noopener">zenhosta/9drive</a>
+  (licença Apache 2.0). Código deste fork: <a href="https://github.com/pcmlab-uepb/9drive" rel="noopener">github.com/pcmlab-uepb/9drive</a>.
+</footer>
+</body>
+</html>

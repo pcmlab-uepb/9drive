@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9Drive — Política de Privacidade / Privacy Policy</title>
+<style>
+  :root { --fg:#111827; --muted:#4b5563; --brand:#2f6fed; --line:#e5e7eb; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color:var(--fg); line-height:1.65; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 32px 24px 64px; }
+  h1 { font-size: 1.7rem; margin-bottom: 4px; }
+  h2 { margin-top: 34px; font-size: 1.15rem; }
+  .sub { color:var(--muted); margin-top:0; }
+  a { color: var(--brand); }
+  ul { padding-left: 1.2rem; }
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: .95rem; }
+  th, td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f9fafb; }
+  .box { border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:20px 0; background:#fafafa; }
+  hr { border:0; border-top:1px solid var(--line); margin:48px 0 8px; }
+  code { background:#f3f4f6; padding:2px 6px; border-radius:4px; font-size:.92em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Política de Privacidade — 9Drive</h1>
+  <p class="sub">PCM Lab — Laboratório de Pesquisa em Química de Materiais · Universidade Estadual da
+  Paraíba (UEPB) · Última atualização: 12 de outubro de 2026</p>
+
+  <h2>1. Quem somos e o que é o 9Drive</h2>
+  <p>O <strong>9Drive</strong> é uma aplicação de uso interno do PCM Lab (UEPB) que reúne várias contas
+  Google Drive em um único painel e direciona cada arquivo enviado para a conta com mais espaço livre.
+  A aplicação é executada em servidor próprio do laboratório; não vendemos, alugamos nem compartilhamos
+  dados de usuários com terceiros.</p>
+
+  <h2>2. Quais dados acessamos do Google</h2>
+  <table>
+    <tr><th>Escopo solicitado</th><th>Para que usamos</th></tr>
+    <tr><td><code>drive</code> (Google Drive)</td>
+        <td>Enviar, listar, organizar em pastas, compartilhar e excluir arquivos na conta que o titular
+        autorizou, e ler o espaço total/usado para escolher a conta de destino do upload.</td></tr>
+    <tr><td><code>userinfo.email</code> e <code>userinfo.profile</code></td>
+        <td>Identificar a conta conectada (e-mail, nome e foto de perfil) para exibi-la no painel e no
+        acompanhamento de cota. Nada além disso é lido.</td></tr>
+  </table>
+  <p>Não acessamos Gmail, Contatos, Calendário nem qualquer outro serviço do Google.</p>
+
+  <h2>3. Como os dados são armazenados</h2>
+  <ul>
+    <li>Os <strong>tokens de acesso e de atualização</strong> (OAuth 2.0) são guardados
+    <strong>criptografados</strong> (AES-256-GCM) em banco de dados MySQL executado em contêiner Docker
+    sob controle do laboratório.</li>
+    <li>Guardamos apenas <strong>metadados</strong> dos arquivos enviados pelo próprio 9Drive
+    (nome, tamanho, tipo, identificador no Drive, conta de destino e data). O conteúdo dos arquivos
+    permanece no Google Drive do titular.</li>
+    <li>O acesso ao painel exige autenticação; as senhas de contas locais são armazenadas com hash.</li>
+    <li>As credenciais de cliente OAuth (client ID/secret) ficam em arquivo de configuração restrito no
+    servidor, nunca em repositório público.</li>
+  </ul>
+
+  <h2>4. Compartilhamento com terceiros</h2>
+  <p>Não compartilhamos dados com terceiros. Não usamos os dados para publicidade, não os vendemos e não
+  os utilizamos para treinar modelos de inteligência artificial. O uso das informações recebidas das
+  APIs do Google está em conformidade com a
+  <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Política de
+  Dados de Usuário dos Serviços de API do Google</a>, incluindo os requisitos de
+  <strong>Uso Limitado (Limited Use)</strong>.</p>
+
+  <h2>5. Por quanto tempo guardamos</h2>
+  <p>Os tokens permanecem válidos enquanto a conta estiver conectada. Ao desconectar uma conta no painel,
+  os tokens e metadados associados são excluídos. As informações da conta local do painel são mantidas
+  enquanto ela existir.</p>
+
+  <h2>6. Como revogar o acesso e excluir dados</h2>
+  <ul>
+    <li>No painel do 9Drive: <em>Setting → desconectar conta</em> (remove tokens e metadados) e exclusão
+    da conta local.</li>
+    <li>Diretamente no Google: <a href="https://myaccount.google.com/permissions" rel="noopener">myaccount.google.com/permissions</a>
+    → selecionar o 9Drive → <em>Remover acesso</em>. A partir daí a aplicação não consegue mais acessar
+    a conta.</li>
+    <li>Para solicitar a exclusão dos dados residuais, escreva para o contato abaixo; atendemos em até
+    30 dias.</li>
+  </ul>
+
+  <h2>7. Segurança</h2>
+  <p>Comunicação com o Google exclusivamente por HTTPS; tokens criptografados em repouso; servidor com
+  acesso restrito aos administradores do laboratório; backups do banco de dados do painel em pasta
+  privada sincronizada.</p>
+
+  <h2>8. Alterações desta política</h2>
+  <p>Alterações serão publicadas nesta página, com atualização da data no topo.</p>
+
+  <h2>9. Contato</h2>
+  <p>PCM Lab — UEPB · <a href="mailto:deoliveirarj@servidor.uepb.edu.br">deoliveirarj@servidor.uepb.edu.br</a><br>
+  Campinas Grande — PB, Brasil</p>
+
+  <div class="box">
+    <strong>Uso Limitado (Limited Use) — declaração</strong>
+    <p>O uso, pelo 9Drive, de informações recebidas das APIs do Google adere à Política de Dados de
+    Usuário dos Serviços de API do Google, incluindo os requisitos de Uso Limitado. Esses dados não são
+    transferidos a terceiros, exceto quando necessário para fornecer ou melhorar recursos visíveis ao
+    usuário, para cumprir a lei aplicável, ou como parte de uma fusão/aquisição; não são usados para
+    publicidade; e não são lidos por humanos, exceto (a) com o consentimento do usuário, (b) para
+    segurança ou cumprimento legal, ou (c) quando os dados forem agregados e anonimizados.</p>
+  </div>
+
+  <hr id="english">
+
+  <h1>Privacy Policy — 9Drive</h1>
+  <p class="sub">PCM Lab — Materials Chemistry Research Laboratory · State University of Paraíba (UEPB),
+  Brazil · Last updated: October 12, 2026</p>
+
+  <h2>1. What 9Drive is</h2>
+  <p>9Drive is an internal application of PCM Lab (UEPB) that aggregates several Google Drive accounts
+  into a single dashboard and routes each uploaded file to the account with the most free space. It runs
+  on the laboratory's own server. We do not sell, rent or share user data with third parties.</p>
+
+  <h2>2. Google data we access</h2>
+  <ul>
+    <li><code>drive</code> — to upload, list, organize, share and delete files in the account the user
+    authorized, and to read total/used storage so we can choose the destination account.</li>
+    <li><code>userinfo.email</code> and <code>userinfo.profile</code> — to identify the connected account
+    (email, name, picture) in the dashboard and quota tracker.</li>
+  </ul>
+  <p>We do not access Gmail, Contacts, Calendar or any other Google service.</p>
+
+  <h2>3. Storage</h2>
+  <p>OAuth access/refresh tokens are stored <strong>encrypted</strong> (AES-256-GCM) in a self-hosted
+  MySQL database. We keep only metadata of files uploaded through 9Drive (name, size, type, Drive file
+  id, destination account, date); file content stays in the user's own Google Drive.</p>
+
+  <h2>4. Sharing</h2>
+  <p>No third-party sharing, no advertising use, no sale, and no use for training AI models. 9Drive's use
+  of information received from Google APIs adheres to the
+  <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API
+  Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements.</p>
+
+  <h2>5. Retention and deletion</h2>
+  <p>Tokens remain while the account is connected; disconnecting removes them and the related metadata.
+  You can also revoke access at
+  <a href="https://myaccount.google.com/permissions" rel="noopener">myaccount.google.com/permissions</a>.
+  For residual data deletion requests, contact us below (handled within 30 days).</p>
+
+  <h2>6. Contact</h2>
+  <p><a href="mailto:deoliveirarj@servidor.uepb.edu.br">deoliveirarj@servidor.uepb.edu.br</a> — PCM Lab,
+  UEPB, Brazil.</p>
+
+  <p class="sub" style="margin-top:36px">Código-fonte / Source code:
+  <a href="https://github.com/pcmlab-uepb/9drive" rel="noopener">github.com/pcmlab-uepb/9drive</a></p>
+</div>
+</body>
+</html>
