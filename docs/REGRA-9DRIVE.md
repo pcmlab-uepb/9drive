@@ -12,17 +12,25 @@ artefatos pesados, conferir o *Quota Tracker* do painel. Credencial do pool nunc
 ficam criptografados no banco do serviço.
 
 **Acesso:** `http://9drive.localhost` (atalho "9Drive" no menu e na área de trabalho) · API interna
-`http://localhost:4000` · banco no volume Docker `9drive_mysql_data` · backup diário às 3h20 em
-`~/Yandex.Disk/9drive-backups` (pasta **sincronizada**; `Pesquisa` não sincroniza).
-Nunca marcar a pasta do projeto como "Nuvem" no Gerenciador do Yandex.Disk — o *Aplicar* **apaga a
-cópia local** (perda real em 12/10/2026).
+`http://localhost:4000` · banco no volume Docker `9drive_mysql_data`.
+Código de trabalho: **`~/projetos/9drive`** (fora do Yandex.Disk) · segredos
+`~/projetos/9drive/.env.docker` (600, nunca versionado) · cópia dos segredos **sincronizada** em
+`~/Yandex.Disk/9drive-backups/.env.docker` · backup do banco às 3h20 em `~/Yandex.Disk/9drive-backups/`
+(retenção 14 dias).
+
+**⚠️ Nunca manter a cópia de trabalho dentro de `~/Yandex.Disk`.** A pasta `Pesquisa` está em
+`--exclude-dirs` (nada dela sobe para a nuvem) e o botão *Aplicar* do Gerenciador do Yandex.Disk
+**apaga a cópia local** das pastas marcadas como "Nuvem": apagou este projeto **duas vezes** em
+12/10/2026. O Yandex.Disk guarda só os backups; o código vive em `~/projetos` + GitHub.
 
 **Recuperação em computador novo (perdi esta máquina):**
 ```bash
-git clone https://github.com/pcmlab-uepb/9drive.git ~/9drive
-cd ~/9drive && bash scripts/instalar-regra-9drive.sh    # repõe ESTA regra em todos os arquivos do harness
-cp .env.docker.example .env.docker                      # preencher segredos (ou recuperar dos containers)
-docker compose --env-file .env.docker up -d --build     # painel em http://9drive.localhost
+git clone https://github.com/pcmlab-uepb/9drive.git ~/projetos/9drive
+cd ~/projetos/9drive
+bash scripts/instalar-regra-9drive.sh                    # repõe ESTA regra em todos os arquivos do harness
+cp ~/Yandex.Disk/9drive-backups/.env.docker .env.docker  # segredos sincronizados (se houver cópia)
+# sem cópia: cp .env.docker.example .env.docker e preencher
+docker compose --env-file .env.docker up -d --build      # painel em http://9drive.localhost
 ```
 Guia completo e histórico das alterações: `FORK-NOTES.md` no repositório.
 Manutenção do dia a dia (OAuth, contas, backup): skill `9drive-drive-pool`.

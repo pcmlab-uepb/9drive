@@ -3,7 +3,7 @@
 # Uso: bash backup-9drive.sh   (agendado no crontab do usuario)
 set -euo pipefail
 
-PROJ="/home/rodrigo/Yandex.Disk/Pesquisa/9drive"
+PROJ="/home/rodrigo/projetos/9drive"
 ENVF="$PROJ/.env.docker"
 # ATENCAO: a pasta Pesquisa esta em --exclude-dirs do daemon do Yandex.Disk
 # (nao sobe para a nuvem). Por isso o backup vai para uma pasta de 1o nivel,

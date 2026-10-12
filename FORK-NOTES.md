@@ -10,7 +10,7 @@ PCM Lab (UEPB) para uso interno: pool de várias contas Google Drive num painel 
 | `backend/src/modules/auth/auth.routes.ts` | removido `include_granted_scopes: true` | O Google somava escopos já concedidos na conta (YouTube, `drive.file`) ao pedido e devolvia `400 invalid_request: scopes that cannot be requested together`, bloqueando o login. |
 | `backend/src/modules/connected-accounts/connected-account.routes.ts` | mesma remoção | Idem, no fluxo de conectar uma nova conta. |
 | `backup-9drive.sh` | novo | Dump diário do MySQL (gzip, retenção de 14) em `~/Yandex.Disk/9drive-backups` — pasta de **1º nível**, que o daemon do Yandex sincroniza de verdade (`Pesquisa` está em `--exclude-dirs` e não sobe), agendado no crontab do usuário. |
-| `frontend/nginx.conf` | bloco `server` para `api.9drive.lvh.me` + `listen 80 default_server` no bloco da SPA | Permite abrir o app sem porta (`http://9drive.lvh.me`), com a API num host próprio. O `default_server` é obrigatório: sem ele o primeiro bloco vira o padrão e engole o frontend (404). |
+| `frontend/nginx.conf` | bloco `server` para a API + `listen 80 default_server` no bloco da SPA | Permite abrir o app sem porta (`http://9drive.localhost`), com a API num host próprio. O `default_server` é obrigatório: sem ele o primeiro bloco vira o padrão e engole o frontend (404). |
 | `docker-compose.yml` | `ports: 80:80` (+`5173:80`) e `frontend/nginx.conf` montado como volume | Endereço sem porta e edição do nginx sem rebuild. |
 | `.gitignore` | `+ .env.docker`, `+ backups/` | Impede que segredos de deploy e dumps do banco entrem no git. |
 
@@ -40,15 +40,22 @@ logo não há CORS envolvido.
 **Não** use `lvh.me`/`nip.io`/`sslip.io`: o Chrome bloqueia domínios públicos que resolvem para
 127.0.0.1 (`net::ERR_BLOCKED_BY_CLIENT`) — o `curl` responde 200 e mascara o problema.
 
-## Recuperação (incidente de 12/10/2026)
+## Onde o projeto vive
+
+Cópia de trabalho: **`~/projetos/9drive`** — **fora** do `~/Yandex.Disk`, de propósito. Segredos em
+`.env.docker` (600, no `.gitignore`), com cópia sincronizada em
+`~/Yandex.Disk/9drive-backups/.env.docker`. Backups do banco na mesma pasta.
+
+## Recuperação (incidentes de 12/10/2026 — duas vezes no mesmo dia)
 
 A pasta `Pesquisa` está em `--exclude-dirs` do daemon do Yandex.Disk e o *Aplicar* do Gerenciador
 (sincronização seletiva) **apaga a cópia local** das pastas marcadas como "Nuvem". A cópia local deste
-projeto foi apagada e, como nada em `Pesquisa` sobe para a nuvem, não havia cópia remota.
+projeto foi apagada duas vezes; como nada em `Pesquisa` sobe para a nuvem, não havia cópia remota.
+Por isso a cópia de trabalho saiu de lá.
 
-Reconstrução: `git clone` daqui + `.env.docker` refeito a partir das variáveis dos containers em
-execução (`docker inspect 9drive-backend-1 9drive-mysql-1`); o banco (volume Docker
-`9drive_mysql_data`) nunca foi afetado. **Nunca marcar a pasta do 9Drive como "Nuvem" no Gerenciador.**
+Reconstrução: `git clone` daqui + `.env.docker` (da cópia sincronizada ou, na falta dela, das variáveis
+dos containers em execução: `docker inspect 9drive-backend-1 9drive-mysql-1`). O banco (volume Docker
+`9drive_mysql_data`) nunca foi afetado. **Nunca manter este projeto dentro de `~/Yandex.Disk`.**
 
 ## Notas
 
